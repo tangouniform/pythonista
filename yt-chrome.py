@@ -1,11 +1,11 @@
 #!python3
 """
-Open url in VLC — Pythonista for iOS app extension.
+Open url in Chrome — Pythonista for iOS app extension.
 
 1. take media url from appex(share)/clipboard/command-line
-2. open it in VLC iphone app
+2. open it in Google Chrome iphone app
 
-e.g., to listen to Youtube video in the background.
+e.g., to watch Youtube video using PIP.
 
 It accepts a media url from any site supported by youtube_dl
 https://rg3.github.io/youtube-dl/supportedsites.html
@@ -22,13 +22,10 @@ import console
 import appex_webbrowser as webbrowser
 
 def open(webpage_url):
-	"""Play media on *webpage_url* in VLC"""
+	"""Play media on *webpage_url* in Google Chrome"""
 	with youtube_dl.YoutubeDL(dict(forceurl=True)) as ydl:
 		r = ydl.extract_info(webpage_url, download=False)
 		media_url = r['formats'][-1]['url']
-    # play the url in VLC
-    # vlc:// + url leads to a popup
-    # https://wiki.videolan.org/Documentation:IOS/#x-callback-url
 	webbrowser.open('googlechromes://' + media_url[8:] )
 
 def main():
